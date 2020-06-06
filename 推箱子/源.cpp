@@ -141,10 +141,28 @@ void gameControl(enum DIRCTION dirct){
 int main(){
 	IMAGE bg_img;
 	char picName[6][32];
-	
+
 	initgraph(SCREEN_WIDTH, SCREEN_HIGHT);
+
 	loadimage(&bg_img, _T("blackground.bmp"), 960, 768, true); //加载图片
 	putimage(0, 0, &bg_img); //使用图片
+	settextstyle(20, 0, "宋体");
+	char explain[5][32];
+	sprintf_s(explain[0],"%s","w 上");
+	sprintf_s(explain[1], "%s", "s 下");
+	sprintf_s(explain[2], "%s", "a 左");
+	sprintf_s(explain[3], "%s", "d 右");
+	sprintf_s(explain[4], "%s", "箱子全部推到目的地,成功过关!");
+	int a = 110; //输出文字X坐标起始位置
+	int b = 50; //输出文字Y坐标起始位置
+	int n = 50; //输出文字坐标偏移
+	for (int i = 0; i < sizeof(explain)/sizeof(string);i++){
+		outtextxy(a, b, explain[i]);
+		a += n;
+		
+	}
+	
+
 	sprintf_s(picName[wall], "%s", "wall_right.bmp");
 	sprintf_s(picName[flor], "%s", "floor.bmp");
 	sprintf_s(picName[des], "%s", "des.bmp");
@@ -188,6 +206,7 @@ int main(){
 				quit = true;
 			}
 			if (isGameover()==true){
+				Sleep(1000);
 				gamemsg(&bg_img);
 				system("pause");
 				quit = true;
